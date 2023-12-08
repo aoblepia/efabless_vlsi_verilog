@@ -87,7 +87,6 @@ module parity_controller (
         parity_s = 0;
 		
 		case (state)
-	
 			WAIT:	begin
 				busy_en = 1;
 				if (start)
@@ -97,17 +96,25 @@ module parity_controller (
 			end
 			
 			INIT:	begin
-                    
+                //busy <= 1
+                busy_en = 1;
+                busy_s = 1;
+
+                data_in_en = 1;
                 one_count_en = 1;
                 zero_count_en = 1;
                 current_bit_en = 1;
                 shift_reg_en = 1;
-                busy_s = 1;
+
+                odd_parity_en = 1;
+                even_parity_en = 1;
                 parity_en = 1;
+
                 if(shift_reg_zero_equals_0)
-                    next_state = ONE_STATE;
-                else
+                //used to be onestate
                     next_state = ZERO_STATE;
+                else
+                    next_state = ONE_STATE;
 			end
 
             ONE_STATE: begin
@@ -134,9 +141,10 @@ module parity_controller (
                 shift_reg_en = 1;
                 shift_reg_s = 1;
                 if(shift_reg_zero_equals_0)
-                    next_state = ONE_STATE;
-                else
+                //used to be onestte
                     next_state = ZERO_STATE;
+                else
+                    next_state = ONE_STATE;
             end
 
             CALCULATE: begin
@@ -211,11 +219,9 @@ module parity_datapath (
     input even_parity_en,
     input even_parity_s,
 
-
     output      current_bit_equals_8,
     output      parity_equals_0,
     output      shift_reg_zero_equals_0,
-
 
 	output reg even_parity,
     output reg odd_parity,
@@ -248,7 +254,6 @@ module parity_datapath (
 				busy <= 0;
 			else
 				busy <= 1;
-				
 
     always @(posedge clk)
         if (one_count_en)
@@ -277,7 +282,7 @@ module parity_datapath (
     always @(posedge clk)
         if (parity_en)
             if(~parity_s)
-                parity <= -1;
+                parity <= 0;
             else
                 parity <= one_count % 2;
 

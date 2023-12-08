@@ -26,21 +26,22 @@ module parity_driver;
 		start = 1;
 		clk = 0;
 		       
-		#100;
+		#10;
 		start = 0;
 		        
-		#100;
+		#10;
 		start = 1;
 		     
-		#100;
+		#10;
 		start = 0;
 		      
-		#100;
+		#10;
 		start = 1;
 		      
-		#100;
-		while (busy && ($time < 400))
+		#10;
+		while (busy)
 			#10;
+			start = ~start;
 		#10;
 		//$monitor ("@ time=%d clk=%b, start=%b, sw_in=%b, seq_num=%b, num=%b, busy=%b", $time, clk, start, sw_in, seq_num, num, busy);
         $monitor ("@ time=%d clk=%b, start=%b, data_in=%b, even_parity=%b, odd_parity=%b, busy=%b", $time, clk, start, data_in, even_parity, odd_parity, busy);

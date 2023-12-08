@@ -15,13 +15,14 @@ module parity_stim (
             4'b0000: begin
                   /*seq_num <= 8'b00000001;
                   sw_in <= 8'b00000011;*/
-                  data_in <= 8'b00000100;
+                  data_in <= 8'b10111101;
             end
 
             4'b0001: begin
                   /*seq_num <= 8'b00000011;
                   sw_in <= 8'b00010001;*/
-                  data_in <= 8'b10111101;
+                  
+                  data_in <= 8'b00000100;
             end
 
             4'b0010: begin
