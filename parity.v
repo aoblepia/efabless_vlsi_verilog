@@ -142,8 +142,8 @@ module parity_controller (
             end
 
             ZERO_STATE: begin
-                zero_count_en = 1;
-                zero_count_s = 1;
+                one_count_en = 0;
+                one_count_s = 0;
                 if(current_bit_equals_8)
                     next_state = CALCULATE;
                 else
@@ -272,10 +272,7 @@ module parity_datapath (
 
     always @(posedge clk)
         if (one_count_en)
-            if(~one_count_s)
-                one_count <= 0;
-            else
-                one_count <= one_count + 1;
+            one_count <= one_count + one_count_s;
 
     //zero_count++
     always @(posedge clk)

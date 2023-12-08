@@ -10,11 +10,11 @@ module parity_stim (
       repeat (4) begin
          case (count)
             4'b0000: begin
-                  data_in <= 8'b10111101;
+                  data_in <= 8'b11111101;
             end
 
             4'b0001: begin
-                  data_in <= 8'b00000100;
+                  data_in <= 8'b00001100;
             end
 
             4'b0010: begin
