@@ -1,12 +1,4 @@
 module parity_driver;
-
-	/*reg clk;
-	wire busy;
-	reg start;
-	wire [7:0] sw_in;
-	wire [7:0] seq_num;
-	wire [7:0] num;*/
-
     reg clk;
     wire busy;
     reg start;
@@ -26,17 +18,26 @@ module parity_driver;
 		start = 1;
 		clk = 0;
 		       
-		#10;
+		#100;
 		start = 0;
 		        
-		#10;
+		#100;
 		start = 1;
 		     
-		#10;
+		#100;
 		start = 0;
 		      
-		#10;
+		#100;
 		start = 1;
+
+		#100;
+		start = 0;
+
+		#100;
+		start = 1;
+
+		#100;
+		start = 0;
 		      
 		#10;
 		while (busy)

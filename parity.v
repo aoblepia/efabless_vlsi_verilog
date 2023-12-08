@@ -159,7 +159,7 @@ module parity_controller (
                 else
                     next_state = ODD_STATE;
             end
-
+            //used to be odd
             ODD_STATE: begin
                 odd_parity_en = 1;
                 odd_parity_s = 1;
@@ -178,11 +178,9 @@ module parity_controller (
 			end
 			
 			default:
-				next_state = WAIT;
-				
+				next_state = WAIT;	
 		endcase
 	end
-	
 endmodule
 
 
@@ -270,7 +268,6 @@ module parity_datapath (
             else
                 zero_count <= zero_count + 1;
 
-
     //current_bit++
     always @(posedge clk)
         if (current_bit_en)
@@ -347,7 +344,6 @@ module parity (
     wire parity_s;
 	
 	parity_controller controller (
-
         .clk(clk),
         .start(start),
         .busy_en(busy_en),
