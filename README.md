@@ -7,6 +7,10 @@ irun -access +r -gui parity.v parity_stim.v_driver.v
 
 to check out the results. See if you can figure it out.
 
+Parity checker:
+input: 8 bit data_in
+output: even_parity bit is set if parity is even, odd_parity bit is set if parity is odd.
+
 | STATE      | ACTION                                      | TRANSITION                                |
 |------------|---------------------------------------------|-------------------------------------------|
 | WAIT       | `busy ← 0`                                  | `if (start) goto INIT`<br>`else goto WAIT`|
