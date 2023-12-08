@@ -35,6 +35,7 @@ module parity_controller (
     output reg parity_s
 	);
 
+    //states are here
     parameter WAIT          = 5'd0;
 	parameter INIT          = 5'd1;
 	parameter ONE_STATE     = 5'd2;
@@ -44,10 +45,13 @@ module parity_controller (
     parameter ODD_STATE     = 5'd6;
 	parameter EVEN_STATE    = 5'd7;
     parameter FINISH        = 5'd8;
+    //parameter INIT2         = 5'd9;
 	
+    //set to idle wait state
 	reg [3:0] state = WAIT;
 	reg [3:0] next_state;
 	
+    //always check for next state.
 	always @(posedge clk)
 		state <= next_state;
 		
@@ -110,12 +114,23 @@ module parity_controller (
                 even_parity_en = 1;
                 parity_en = 1;
 
+                //next_state = INIT2;
                 if(shift_reg_zero_equals_0)
                 //used to be onestate
                     next_state = ZERO_STATE;
                 else
                     next_state = ONE_STATE;
+
 			end
+
+            //tried to see if a new cycle would fix it
+            /*INIT2:  begin
+                if(shift_reg_zero_equals_0)
+                //used to be onestate
+                    next_state = ZERO_STATE;
+                else
+                    next_state = ONE_STATE;
+            end*/
 
             ONE_STATE: begin
                 one_count_en = 1;
@@ -148,8 +163,8 @@ module parity_controller (
             end
 
             CALCULATE: begin
-                one_count_en = 1;
-                one_count_s = 1;
+                //one_count_en = 1;
+                //one_count_s = 1;
 
                 parity_en = 1;
                 parity_s = 1;
@@ -242,6 +257,8 @@ module parity_datapath (
 		if (shift_reg_en)
 			if (~shift_reg_s)
 				shift_reg <= data_in;
+                //Try hard coding odd parity value?
+                //shift_reg <= 8'b10010001;
 			else
 				shift_reg <= shift_reg >> 1;
     
@@ -301,7 +318,6 @@ module parity_datapath (
     assign current_bit_equals_8 = (current_bit == 8);
     assign parity_equals_0 = (parity == 0);
     assign shift_reg_zero_equals_0 = (shift_reg[0] == 0);
-	
 endmodule
 
 
@@ -419,5 +435,4 @@ module parity (
         .parity_equals_0(parity_equals_0),
         .shift_reg_zero_equals_0(shift_reg_zero_equals_0)
 	);
-	
 endmodule
