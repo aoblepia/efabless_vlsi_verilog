@@ -1,15 +1,11 @@
 # efabless_vlsi_verilog
 
-The driver and the stim code work, but the actual parity checker is not working. 
-Run:
-
-irun -access +r -gui parity.v parity_stim.v_driver.v
-
-to check out the results. See if you can figure it out.
+`irun -access +r -gui parity.v parity_stim.v parity_driver.v`
 
 Parity checker:
 input: 8 bit data_in
-output: even_parity bit is set if parity is even, odd_parity bit is set if parity is odd.
+output: even_parity bit is set if parity is even, 
+        odd_parity bit is set if parity is odd.
 
 | STATE      | ACTION                                      | TRANSITION                                |
 |------------|---------------------------------------------|-------------------------------------------|
