@@ -2,7 +2,7 @@ module parity_stim (
     output reg [7:0] data_in
 );
 
-   parameter delay = 200;
+   parameter delay = 210;
    reg [3:0] count;
 
    initial begin
