@@ -44,10 +44,6 @@ The parity checker circuit takes an 8-bit binary input (`data_in`) and checks fo
 - `even_parity`: Set if `data_in` contains even bit parity.
 - `odd_parity`: Set if `data_in` contains odd bit parity.
 
-## Synthesis Details
-
-The Verilog code is designed to be synthesized on the EFabless Caravel OpenLane flow using the Global Foundries gf180mcuD Process Development Kit. Please refer to the specific documentation for the synthesis process.
-
 ## Project Setup and Implementation
 
 To set up the EFabless environment and run through the project, including mapping the Verilog to `user_proj_example.v` and mapping the `user_proj_example` module to the `user_project_wrapper`, follow the steps outlined in the following notebooks:
