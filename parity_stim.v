@@ -1,3 +1,6 @@
+//Stim file to test certain inputs.
+//Change data_in register sets as necessary.
+
 module parity_stim (
     output reg [7:0] data_in
 );

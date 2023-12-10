@@ -1,3 +1,5 @@
+//Driver file for parity checker.
+
 module parity_driver;
    
     reg clk;
