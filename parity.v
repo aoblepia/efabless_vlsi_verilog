@@ -282,22 +282,35 @@ module parity_datapath (
             else
                 shift_reg <= shift_reg >> 1;
    
-    //busy signal and enable
+    /*//busy signal and enable
     always @ (posedge clk)
         if (busy_en)
             if (~busy_s)
                 busy <= 0;
-            else
+            else begin
                 busy <= 1;
+                one_count <= 0;
+            end*/
 
-    //ensure one_count isn't updated every cycle          
-    always @ (posedge busy)
-        one_count <= 0;
+    //ensure one_count is reset when busy          
+    /*always @ (posedge busy)
+        //if (one_count)
+        one_count <= 0;*/
 
     //if enabled, increment.
-    always @(posedge clk)
-        if (one_count_en)
+    always @(posedge clk) begin
+        if (one_count_en) begin
             one_count <= one_count + 1;
+        end
+        if (busy_en) begin
+            if (~busy_s)
+                busy <= 0;
+            else begin
+                busy <= 1;
+                one_count <= 0;
+            end
+        end
+    end
 
     //current_bit++
     always @(posedge clk)
@@ -322,7 +335,6 @@ module parity_datapath (
                 odd_parity <= 0;
             else
                 odd_parity <= 1;
-
 
     //even_parity output checker
     always @(posedge clk)
